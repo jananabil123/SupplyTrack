@@ -1,3 +1,4 @@
 <Solution>
+  <Project Path="../SupplyTrack.Core/SupplyTrack.Core.csproj" Id="779200fe-88cb-46f1-8231-ac4201c60132" />
   <Project Path="SupplyTrack.csproj" />
 </Solution>

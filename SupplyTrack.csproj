@@ -7,4 +7,15 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Material.cs" />
+    <Compile Remove="RequestLine.cs" />
+    <Compile Remove="RequestStatus.cs" />
+    <Compile Remove="SupplyRequest.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SupplyTrack.Core\SupplyTrack.Core.csproj" />
+  </ItemGroup>
+
 </Project>

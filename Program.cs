@@ -1,4 +1,4 @@
-﻿using SupplyTrack;
+﻿using SupplyTrack.Core;
 
 List<Material> materials = new List<Material>();
 List<SupplyRequest> requests = new List<SupplyRequest>();
