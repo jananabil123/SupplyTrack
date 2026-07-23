@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SupplyTrack.Application\SupplyTrack.Application.csproj" />
     <ProjectReference Include="..\SupplyTrack.Core\SupplyTrack.Core.csproj" />
   </ItemGroup>
 

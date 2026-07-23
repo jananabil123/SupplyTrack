@@ -1,7 +1,12 @@
 ﻿using SupplyTrack.Core;
+using SupplyTrack.Application.Services;
+using SupplyTrack.Core.Repositories;
 
-List<Material> materials = new List<Material>();
-List<SupplyRequest> requests = new List<SupplyRequest>();
+MaterialRepository materialRepository = new MaterialRepository();
+MaterialService materialService = new MaterialService(materialRepository);
+
+SupplyRequestRepository supplyRequestRepository = new SupplyRequestRepository();
+SupplyRequestService supplyRequestService = new SupplyRequestService(supplyRequestRepository);
 while (true)
 {
     ShowMenu();
@@ -38,12 +43,12 @@ while (true)
         }
 
         material.Stock = stock;
-        materials.Add(material);
+        materialService.AddMaterial(material);
         Console.WriteLine("Material added successfully!");
     }
     if (choice == "2")
     {
-        ListMaterials(materials);
+        ListMaterials(materialService.GetAllMaterials());
     }
     if (choice == "3")
     {
@@ -52,7 +57,7 @@ while (true)
 
         bool found = false;
 
-        foreach (Material material in materials)
+        foreach (Material material in materialService.GetAllMaterials())
         {
             if (material.Code == code)
             {
@@ -72,7 +77,7 @@ while (true)
     {
         SupplyRequest request = new SupplyRequest();
 
-        request.Id = requests.Count + 1;
+        request.Id = supplyRequestService.GetAllRequests().Count + 1;
 
         Console.Write("Enter requester name: ");
         request.RequesterName = Console.ReadLine();
@@ -90,7 +95,7 @@ while (true)
 
             request.Lines.Add(line);
         }
-        requests.Add(request);
+        supplyRequestService.AddRequest(request);
 
         Console.WriteLine("Supply request created successfully!");
     }
@@ -98,7 +103,7 @@ while (true)
     {
         Console.WriteLine("=== Supply Requests ===");
 
-        foreach (SupplyRequest request in requests)
+        foreach (SupplyRequest request in supplyRequestService.GetAllRequests())
         {
             Console.WriteLine($"Request ID: {request.Id}");
             Console.WriteLine($"Requester: {request.RequesterName}");
@@ -112,7 +117,7 @@ while (true)
         int requestId = int.Parse(Console.ReadLine());
         SupplyRequest foundRequest = null;
 
-        foreach (SupplyRequest request in requests)
+        foreach (SupplyRequest request in supplyRequestService.GetAllRequests())
         {
             if (request.Id == requestId)
             {
@@ -142,7 +147,7 @@ while (true)
         Console.Write("Enter Request ID: ");
         int requestId = int.Parse(Console.ReadLine());
 
-        foreach (SupplyRequest request in requests)
+        foreach (SupplyRequest request in supplyRequestService.GetAllRequests())
         {
             if (request.Id == requestId)
             {
@@ -157,7 +162,7 @@ while (true)
         Console.Write("Enter Request ID: ");
         int requestId = int.Parse(Console.ReadLine());
 
-        foreach (SupplyRequest request in requests)
+        foreach (SupplyRequest request in supplyRequestService.GetAllRequests())
         {
             if (request.Id == requestId)
             {
@@ -172,7 +177,7 @@ while (true)
         Console.Write("Enter Request ID: ");
         int requestId = int.Parse(Console.ReadLine());
 
-        foreach (SupplyRequest request in requests)
+        foreach (SupplyRequest request in supplyRequestService.GetAllRequests())
         {
             if (request.Id == requestId)
             {
@@ -187,7 +192,7 @@ while (true)
         Console.Write("Enter Request ID: ");
         int requestId = int.Parse(Console.ReadLine());
 
-        foreach (SupplyRequest request in requests)
+        foreach (SupplyRequest request in supplyRequestService.GetAllRequests())
         {
             if (request.Id == requestId)
             {
@@ -195,7 +200,7 @@ while (true)
 
                 foreach (RequestLine line in request.Lines)
                 {
-                    foreach (Material material in materials)
+                    foreach (Material material in materialService.GetAllMaterials())
                     {
                         if (material.Code == line.MaterialCode)
                         {
@@ -215,7 +220,7 @@ while (true)
 
                 foreach (RequestLine line in request.Lines)
                 {
-                    foreach (Material material in materials)
+                    foreach (Material material in materialService.GetAllMaterials())
                     {
                         if (material.Code == line.MaterialCode)
                         {
@@ -233,7 +238,7 @@ while (true)
     {
         Console.WriteLine("===== Low Stock Report =====");
 
-        foreach (Material material in materials)
+        foreach (Material material in materialService.GetAllMaterials())
         {
             if (material.Stock < 20)
             {
