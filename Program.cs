@@ -33,7 +33,7 @@ while (true)
             material.Name = Console.ReadLine();
         }
 
-        int stock;
+        int  stock;
 
         Console.Write("Enter Stock: ");
 
