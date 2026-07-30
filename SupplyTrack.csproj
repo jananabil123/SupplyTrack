@@ -12,11 +12,17 @@
     <Compile Remove="RequestLine.cs" />
     <Compile Remove="RequestStatus.cs" />
     <Compile Remove="SupplyRequest.cs" />
+    <Compile Remove="SupplyTrack.Core\**" />
+    <Compile Remove="SupplyTrack.Application\**" />
+    <EmbeddedResource Remove="SupplyTrack.Core\**" />
+    <EmbeddedResource Remove="SupplyTrack.Application\**" />
+    <None Remove="SupplyTrack.Core\**" />
+    <None Remove="SupplyTrack.Application\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SupplyTrack.Application\SupplyTrack.Application.csproj" />
-    <ProjectReference Include="..\SupplyTrack.Core\SupplyTrack.Core.csproj" />
+    <ProjectReference Include="SupplyTrack.Application\SupplyTrack.Application.csproj" />
+    <ProjectReference Include="SupplyTrack.Core\SupplyTrack.Core.csproj" />
   </ItemGroup>
 
 </Project>
