@@ -9,9 +9,11 @@ SupplyRequestRepository supplyRequestRepository = new SupplyRequestRepository();
 SupplyRequestService supplyRequestService = new SupplyRequestService(supplyRequestRepository);
 while (true)
 {
-    ShowMenu();
-    Console.Write("Choose an option: ");
-    string? choice = Console.ReadLine();
+    try
+    {
+        ShowMenu();
+        Console.Write("Choose an option: ");
+        string? choice = Console.ReadLine();
 
     if (choice == "0")
     {
@@ -248,6 +250,11 @@ while (true)
                 Console.WriteLine("----------------------");
             }
         }
+    }
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Error: {ex.Message}");
     }
 }
 static void ShowMenu()

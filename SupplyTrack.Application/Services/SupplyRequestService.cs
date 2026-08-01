@@ -1,4 +1,5 @@
-﻿using SupplyTrack.Core;
+﻿using System.Linq;
+using SupplyTrack.Core;
 using SupplyTrack.Core.Interfaces;
 
 namespace SupplyTrack.Application.Services
@@ -30,6 +31,39 @@ namespace SupplyTrack.Application.Services
             }
 
             return null;
+        }
+        public List<SupplyRequest> GetRequestsByStatus(RequestStatus status)
+        {
+            return _supplyRequestRepository
+                .GetAll()
+                .Where(request => request.Status == status)
+                .ToList();
+        }
+        public Dictionary<string, int> GetTopRequestedMaterials()
+        {
+            return _supplyRequestRepository
+                .GetAll()
+                .SelectMany(request => request.Lines)
+                .GroupBy(line => line.MaterialCode)
+                .OrderByDescending(group => group.Sum(line => line.Quantity))
+                .ToDictionary(
+                    group => group.Key,
+                    group => group.Sum(line => line.Quantity)
+                );
+        }
+        public double GetAverageFulfillmentTime()
+        {
+            var fulfilledRequests = _supplyRequestRepository
+                .GetAll()
+                .Where(request => request.FulfilledAt.HasValue);
+
+            if (!fulfilledRequests.Any())
+            {
+                return 0;
+            }
+
+            return fulfilledRequests
+                .Average(request => (request.FulfilledAt.Value - request.CreatedAt).TotalHours);
         }
     }
 }

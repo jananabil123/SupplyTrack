@@ -1,4 +1,5 @@
-﻿using SupplyTrack.Core;
+﻿using System.Linq;
+using SupplyTrack.Core;
 using SupplyTrack.Core.Interfaces;
 
 namespace SupplyTrack.Application.Services
@@ -31,5 +32,13 @@ namespace SupplyTrack.Application.Services
 
             return null;
         }
+        public List<Material> GetLowStockMaterials(int threshold)
+        {
+            return _materialRepository
+                .GetAll()
+                .Where(material => material.Stock < threshold)
+                .ToList();
+        }
     }
+
 }
