@@ -1,17 +1,20 @@
 ﻿using SupplyTrack.Core;
 using SupplyTrack.Application.Services;
 using SupplyTrack.Core.Repositories;
+using SupplyTrack.Infrastructure.Persistence;
 
-MaterialRepository materialRepository = new MaterialRepository();
+MaterialJsonRepository materialRepository = new MaterialJsonRepository();
 MaterialService materialService = new MaterialService(materialRepository);
 
-SupplyRequestRepository supplyRequestRepository = new SupplyRequestRepository();
+SupplyRequestJsonRepository supplyRequestRepository = new SupplyRequestJsonRepository();
 SupplyRequestService supplyRequestService = new SupplyRequestService(supplyRequestRepository);
 while (true)
 {
-    ShowMenu();
-    Console.Write("Choose an option: ");
-    string? choice = Console.ReadLine();
+    try
+    {
+        ShowMenu();
+        Console.Write("Choose an option: ");
+        string? choice = Console.ReadLine();
 
     if (choice == "0")
     {
@@ -33,7 +36,7 @@ while (true)
             material.Name = Console.ReadLine();
         }
 
-        int stock;
+        int  stock;
 
         Console.Write("Enter Stock: ");
 
@@ -248,6 +251,11 @@ while (true)
                 Console.WriteLine("----------------------");
             }
         }
+    }
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Error: {ex.Message}");
     }
 }
 static void ShowMenu()

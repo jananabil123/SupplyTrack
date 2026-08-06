@@ -9,6 +9,8 @@
         public RequestStatus Status { get; set; } = RequestStatus.Draft;
 
         public List<RequestLine> Lines { get; set; } = new List<RequestLine>();
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public DateTime? FulfilledAt { get; set; }
         public void Submit()
         {
             if (Status != RequestStatus.Draft)
@@ -51,6 +53,7 @@
             }
 
             Status = RequestStatus.Fulfilled;
+            FulfilledAt = DateTime.Now;
             Console.WriteLine("Request fulfilled successfully.");
         }
 
