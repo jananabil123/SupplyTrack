@@ -1,11 +1,12 @@
 ﻿using SupplyTrack.Core;
 using SupplyTrack.Application.Services;
 using SupplyTrack.Core.Repositories;
+using SupplyTrack.Infrastructure.Persistence;
 
-MaterialRepository materialRepository = new MaterialRepository();
+MaterialJsonRepository materialRepository = new MaterialJsonRepository();
 MaterialService materialService = new MaterialService(materialRepository);
 
-SupplyRequestRepository supplyRequestRepository = new SupplyRequestRepository();
+SupplyRequestJsonRepository supplyRequestRepository = new SupplyRequestJsonRepository();
 SupplyRequestService supplyRequestService = new SupplyRequestService(supplyRequestRepository);
 while (true)
 {
